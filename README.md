@@ -213,6 +213,8 @@ python path/to/quick_validate.py focus-coach
 
 本项目受到 Matt Pocock 的 [`teach` 技能](https://github.com/mattpocock/skills/blob/main/skills/productivity/teach/SKILL.md) 启发，尤其是它对状态化教学工作区、使命驱动课程、学习记录和长期能力建设的设计。
 
+🙏 感谢 [LINUX DO](https://linux.do/) 社区的支持与讨论。
+
 ## 许可证
 
 MIT
