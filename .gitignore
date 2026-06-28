@@ -1,0 +1,18 @@
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local editor state
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/
+
+# Node/Python local artifacts if examples are added later
+node_modules/
+__pycache__/
+.pytest_cache/
