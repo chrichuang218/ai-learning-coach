@@ -1,11 +1,19 @@
 # Minimal Multitrack Workspace
 
-这是一个最小多轨道学习工作区样例。
+这个示例展示两个长期轨道，但本周期只推进 `typescript-agent`：
 
-它展示如何把多个长期学习方向放进同一个工作区，但每次只推进一个轨道的一个小闭环。
+- `typescript-agent`：活跃，使用真实 mini-claude 源码学习 TypeScript 和 Agent。
+- `writing`：冻结，只保留使命，不创建空的 lesson、record 或 reference 目录。
 
-## 当前主线
+当前存在的产物都有真实理由：
 
-本周主线是 `typescript-agent`：用一个最小 Agent 工具调用任务，暴露 TypeScript 和 Agent 执行链路的真实卡点。
+- `PROGRESS.md`：掌握状态从使命、项目范围和学习记录派生，同时保存紧凑出勤活动。
+- `sources/mini-claude.md`：真实项目入口。
+- `learning-records/typescript-agent/ts-agent-0000-foundation-baseline.md`：支撑初始 TypeScript、异步、Debug 和真实项目接触状态。
+- `learning-records/typescript-agent/...`：已经产生掌握证据。
+- `reference/typescript-agent/...`：异步知识已经稳定。
+- `lessons/typescript-agent/...`：这次源码辅导需要跨会话恢复，所以保存教练 brief。
 
-`writing` 暂停，不删除。等当前技术主线完成一个可验证输出后再恢复。
+这不是要求用户预先创建的完整目录模板。
+
+`PROGRESS.md` 中的目标百分比和项目百分比分开计算。贡献日历提供持续学习感，但不会因为打卡自动提高掌握状态。

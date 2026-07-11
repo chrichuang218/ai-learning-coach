@@ -1,0 +1,43 @@
+name: Coaching idea or domain adapter
+description: 提议新的训练模式、领域适配、示例或 eval
+title: "[Idea] "
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 提议类型
+      options:
+        - 训练模式
+        - 领域适配
+        - Eval 用例
+        - 工作区格式
+        - 文档与安装体验
+        - 其他
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 要解决的真实问题
+      description: 请先描述用户在哪种场景下失败，不要只描述功能名称。
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: 现实示例
+      description: 给出一个用户可能真的输入的 prompt 或真实任务。
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: 建议的教练行为
+      description: 第一可见动作、反馈来源、掌握证据和停止条件分别是什么？
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: 误用风险
+      description: 什么时候不应该使用这个建议？

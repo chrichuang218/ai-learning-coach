@@ -1,0 +1,20 @@
+{
+  "name": "ai-learning-coach",
+  "interface": {
+    "displayName": "AI Learning Coach"
+  },
+  "plugins": [
+    {
+      "name": "ai-learning-coach",
+      "source": {
+        "source": "local",
+        "path": "./plugins/ai-learning-coach"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Education & Research"
+    }
+  ]
+}

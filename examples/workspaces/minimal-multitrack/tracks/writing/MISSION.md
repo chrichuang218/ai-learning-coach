@@ -1,13 +1,15 @@
-# Writing 轨道使命
+# Mission: 提升技术写作表达
 
 ## 状态
 
-暂停。
+冻结。
 
-## 为什么暂停
+## Why
 
-本周期技术主线更重要。写作轨道保留，不删除，避免目标切换造成注意力稀释。
+未来把复杂技术内容写成清晰、可验证、对读者有用的文章。
 
 ## 恢复条件
 
-`typescript-agent` 完成一个可运行 demo 并写入学习记录后，再恢复一轮 60 分钟短文改稿练习。
+当前 `typescript-agent` 真实源码链路完成阶段复盘后，再由 `focus-coach` 判断是否切换主线。
+
+冻结期间不创建空 lesson、reference 或 learning record。

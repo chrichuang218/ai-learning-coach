@@ -1,20 +1,18 @@
-# TypeScript Agent 短地图
+# TypeScript Agent 短主线
 
-不要展开成完整课程。当前只保留最近三个闭环。
+## 当前真实锚点
 
-## 当前闭环
+追踪 memory prefetch 进入模型请求：
 
-任务：实现一个最小 `getWeather` tool call mock。
+1. `src/memory.ts`：`startMemoryPrefetch()` 创建 handle。
+2. `src/agent.ts`：`chatOpenAI()` / `chatAnthropic()` 检查并消费结果。
+3. 消息数组修改后进入对应 SDK 调用。
 
-验收标准：
+只展开当前链路。后续入口根据用户在真实源码中的证据决定，不预排完整课程表。
 
-- 有一个明确的 tool schema。
-- 有一个可运行的 handler。
-- 能打印输入参数和返回结果。
-- 能解释 schema、handler、result 三者关系。
+## 当前掌握要求
 
-## 后续候选
-
-1. 把 tool result 接回 agent message。
-2. 给 tool call 加错误分支。
-3. 阅读一个真实项目里的 tool registry。
+- 能指出 Promise 在哪里创建。
+- 能解释为什么启动时不 await。
+- 能找到结果消费和消息修改位置。
+- 能使用 Run 或 Debug 验证至少一个状态变化。

@@ -1,7 +1,0 @@
-interface:
-  display_name: "Focus Coach"
-  short_description: "收敛多目标、判断优先级，并给出可验证下一步动作"
-  default_prompt: "Use $focus-coach to help me choose one priority and define the next verifiable action."
-
-policy:
-  allow_implicit_invocation: true

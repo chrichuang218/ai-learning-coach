@@ -1,8 +1,8 @@
 # Evaluation Rubric
 
-这个目录分开评估两个 skill：
+不要用同一张评分表评估两个 Skill：
 
-- [learning-coach-rubric.md](learning-coach-rubric.md)：项目牵引学习、练习、验收和复盘。
-- [focus-coach-rubric.md](focus-coach-rubric.md)：目标收敛、优先级判断、瓶颈诊断和执行复盘。
+- [learning-coach-rubric.md](learning-coach-rubric.md)：评估是否像主动备课、逐步带学的私人教练。
+- [focus-coach-rubric.md](focus-coach-rubric.md)：评估是否做出明确战略取舍并及时退出。
 
-不要用同一张评分表评估两个 skill。`learning-coach` 的核心是学习闭环，`focus-coach` 的核心是取舍和下一步决策。
+先检查请求路由，再使用对应评分表。

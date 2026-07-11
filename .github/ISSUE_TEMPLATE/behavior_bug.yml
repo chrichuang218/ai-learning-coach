@@ -1,0 +1,54 @@
+name: Skill behavior bug
+description: 报告触发、路由、教学行为或工作区写入问题
+title: "[Behavior] "
+body:
+  - type: dropdown
+    id: skill
+    attributes:
+      label: 相关 Skill
+      options:
+        - learning-coach
+        - focus-coach
+        - 两者路由
+        - 不确定
+    validations:
+      required: true
+  - type: textarea
+    id: prompt
+    attributes:
+      label: 用户原始请求
+      description: 请匿名化敏感信息，并尽量保留原始措辞。
+      placeholder: 开始学习 TS 吧。
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: 当时上下文
+      description: 学习背景、真实项目、已有记录或会影响判断的约束。
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: 为什么这是问题
+      description: 它如何浪费学习时间、破坏连续性或造成错误判断？
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: 隐私确认
+      options:
+        - label: 我已删除 API key、私人代码、个人路径和其他敏感信息。
+          required: true

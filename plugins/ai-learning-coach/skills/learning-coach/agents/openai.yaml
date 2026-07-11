@@ -1,0 +1,7 @@
+interface:
+  display_name: "Learning Coach"
+  short_description: "主动读取学习现场，用真实项目和掌握证据一次一步带你学会"
+  default_prompt: "使用 $learning-coach 读取我的学习现场和真实材料，替我选择下一步，一次只带我完成一个学习动作，并在有证据时更新学习进度。"
+
+policy:
+  allow_implicit_invocation: true

@@ -1,13 +1,15 @@
-# TypeScript Agent 资源
+# Resources: TypeScript Agent
 
-## 主资源
+## Primary
 
-- TypeScript 官方文档：用于查类型、对象、函数和模块边界。
+- `sources/mini-claude.md`：当前唯一主源码读本。
 
-## 当前真实锚点
+## Practice Anchors
 
-- 最小 `getWeather` tool call demo。
+- `src/memory.ts`：memory recall 与 prefetch。
+- `src/agent.ts`：OpenAI / Anthropic 模型调用链。
+- 项目已有 build、test 和 Debug 能力。
 
-## 资源原则
+## Parking Lot
 
-资源只服务当前动作，不维护长书单。
+- TypeScript 官方文档：只有真实源码出现新语法边界时按需查阅。

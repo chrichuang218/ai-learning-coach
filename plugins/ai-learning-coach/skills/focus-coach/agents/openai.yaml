@@ -1,0 +1,7 @@
+interface:
+  display_name: "Focus Coach"
+  short_description: "在多个目标和学习方向中做明确取舍，选定本周期唯一主线"
+  default_prompt: "使用 $focus-coach 帮我判断当前最重要的主线、最大约束和本周期可验证承诺。"
+
+policy:
+  allow_implicit_invocation: true

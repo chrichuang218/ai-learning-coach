@@ -1,0 +1,40 @@
+{
+  "name": "ai-learning-coach",
+  "version": "2.0.0",
+  "description": "AI private coaching skills for real-task learning, evidence-based mastery, and visible progress.",
+  "author": {
+    "name": "chrichuang218",
+    "url": "https://github.com/chrichuang218"
+  },
+  "homepage": "https://github.com/chrichuang218/ai-learning-coach#readme",
+  "repository": "https://github.com/chrichuang218/ai-learning-coach",
+  "license": "MIT",
+  "keywords": [
+    "learning",
+    "coaching",
+    "education",
+    "source-code",
+    "deliberate-practice",
+    "learning-progress"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Learning Coach",
+    "shortDescription": "主动备课，一次一步带你真正学会",
+    "longDescription": "一组中文 AI 私人教练 Skill：主动读取学习现场和真实材料，选择最近发展区，通过逐步提问、实践、Debug 与迁移证据推进掌握，并用 Markdown 展示目标进度、项目进度、贡献日历和 ETA。",
+    "developerName": "chrichuang218",
+    "category": "Education & Research",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://github.com/chrichuang218/ai-learning-coach",
+    "defaultPrompt": [
+      "使用 $learning-coach 读取我的学习现场，替我选择下一步，一次只带我完成一个动作。",
+      "使用 $focus-coach 帮我从多个目标中选定当前唯一主线。",
+      "继续上次的学习，先检查我已经掌握了什么，再给我下一步。"
+    ],
+    "brandColor": "#0F766E"
+  }
+}

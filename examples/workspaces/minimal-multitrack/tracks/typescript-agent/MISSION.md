@@ -1,18 +1,30 @@
-# TypeScript Agent 轨道使命
+# Mission: 通过 mini-claude 学 TypeScript 与 Agent
 
-## 为什么学
+## Why
 
-用 TypeScript 理解和实现一个最小 AI Agent 执行链路，而不是只看语法教程。
+学习者有 Java 经验，希望通过真实 coding agent 源码建立 TypeScript 和 JavaScript 运行时心智，而不是先背完整语法表。
 
-## 目标结果
+## Success looks like
 
-能够解释并实现：
+- 能从 `src/cli.ts` 进入 `Agent.chat()` 并追踪模型请求。
+- 能解释常见类型边界、消息结构和 async 控制流。
+- 能用 Run 与 Debug 验证预测。
+- 能在理解边界后完成低风险修改。
 
-- 用户输入如何进入 Agent。
-- tool schema 如何定义。
-- tool call 如何执行。
-- 执行结果如何回到模型或下一步逻辑。
+## Completion criteria
 
-## 成功标准
+- 能在不依赖逐步提示时追踪一条新的 Agent 链路并解释类型与运行时边界。
+- 能完成一个低风险跨模块修改，并用测试、Run 或 Debug 验证结果。
+- 不要求读完 mini-claude 每个文件，也不以 lesson 数量作为完成标准。
 
-完成一个能运行的最小 tool call demo，并能用自己的话解释每一步。
+## Constraints
+
+- 真实项目默认只读。
+- 一次只追一条控制流、数据流或类型关系。
+- 不默认生成 HTML lesson 或玩具练习。
+
+## Out of scope
+
+- React。
+- 高级类型体操。
+- 尚未理解当前单 Agent 链路前的复杂多 Agent 架构。

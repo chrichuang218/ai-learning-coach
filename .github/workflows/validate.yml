@@ -1,0 +1,40 @@
+name: Validate skills
+
+env:
+  CODEX_CLI_VERSION: "0.144.1"
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install validation dependency
+        run: python -m pip install pyyaml
+
+      - name: Validate repository
+        run: python scripts/validate_repo.py
+
+      - name: Install Codex CLI
+        run: npm install --global "@openai/codex@${CODEX_CLI_VERSION}"
+
+      - name: Smoke test marketplace installation
+        run: python scripts/release_smoke.py

@@ -1,7 +1,0 @@
-interface:
-  display_name: "Learning Coach"
-  short_description: "用真实项目驱动 30-90 分钟练习、验收和证据复盘"
-  default_prompt: "Use $learning-coach to turn my learning goal into a project-based 60-minute practice loop with evidence-based review."
-
-policy:
-  allow_implicit_invocation: true

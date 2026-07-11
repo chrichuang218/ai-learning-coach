@@ -1,31 +1,33 @@
-# ts-agent-0001-tool-call-chain
+# 能解释 Tool Call 结果必须回填消息历史
 
-## 主题
+日期：2026-07-12
+真实锚点：mini-claude tool call loop
+贡献等级：`█`
+推进里程碑：Agent 消息、工具与 memory 链路；Tool call / result 生命周期
 
-用最小 tool call 理解 Agent 执行链路。
+## 本轮结论
 
-## 目标
+用户已经理解：工具结果只打印到终端不会改变模型上下文，必须以 provider 要求的消息结构回填 history。
 
-把 “Agent 会调用工具” 从抽象说法变成可解释的输入、执行、输出过程。
+## 掌握证据
 
-## 本轮动作
+- 能解释 tool call 的参数解析、权限判断、执行和结果回填顺序。
+- 能指出 OpenAI 的 `role: "tool"` 与 Anthropic 的 `tool_result` 只是 DTO 形状不同。
+- 能说明 call id 为什么必须与前面的工具调用对应。
 
-实现并运行一个 mock `getWeather` tool call。
+## 真实卡点与纠正
 
-## 证据
+- 原模型：工具已经执行并打印，模型应该自然知道结果。
+- 纠正：通过下一轮消息历史观察，确认终端输出不属于模型输入。
 
-- 能说清 tool schema 描述参数。
-- 能说清 handler 接收参数并返回结果。
-- 能说清 result 需要回到后续消息或控制流。
+## 后续可默认
 
-## 真实卡点
+- 工具执行闭环和消息历史回填的基本目的。
 
-容易把 schema 当成真正执行逻辑；实际上 schema 只是描述，handler 才执行。
+## 能力边界
 
-## 影响
+- 尚未独立追踪并发工具与 streaming early execution。
 
-下一轮不急着学完整框架，先练 tool result 如何接回 agent message。
+## 下一处真实入口
 
-## 下一步
-
-做一个 60 分钟闭环：把 tool result 包装成下一条 assistant/tool message。
+- `src/memory.ts`：`startMemoryPrefetch()`
