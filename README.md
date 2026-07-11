@@ -9,6 +9,18 @@
 
 **你只需要坐下来并说“开始学习”，教练负责理解你的背景、选择真实项目、找到合适入口，一次一步带你真正学会。**
 
+<p align="center">
+  <img src="assets/product/coaching-session.png" alt="AI Learning Coach 在真实 TypeScript Agent 源码中进行实时对话辅导" width="100%">
+</p>
+
+<p align="center"><sub>实时对话 + 真实源码：教练选择当前入口，用户围绕代码连续追问并建立理解。</sub></p>
+
+<p align="center">
+  <img src="assets/product/learning-progress.png" alt="Learning Lab 使用 Markdown 展示目标进度、项目进度、学习节奏和时间估算" width="100%">
+</p>
+
+<p align="center"><sub>长期学习记忆：用 Markdown 记录掌握证据、项目进度、贡献日历和剩余时间。</sub></p>
+
 AI Learning Coach 是一个中文优先的 Codex 私人学习教练插件。它不把课程设计责任推给用户，也不默认生成教程、HTML 课程或完整任务单，而是通过真实项目、持续对话、Run、Debug 和掌握证据动态推进学习，并用纯 Markdown 显示目标进度、项目进度、学习节奏和剩余时间。
 
 首要服务对象是希望通过真实代码学习 TypeScript、AI Agent、源码阅读和新技术栈的开发者。相同方法也适用于写作、语言、考试、研究和职业技能。
