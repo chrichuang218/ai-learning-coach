@@ -1,7 +1,7 @@
 # Release Acceptance
 
-当前候选版本：`2.0.0`
-最近执行日期：2026-07-12
+当前候选版本：`2.0.1`
+最近执行日期：2026-07-23
 Codex CLI：`0.144.1`
 状态：PASS（发布候选验证）
 
@@ -12,6 +12,7 @@ Codex CLI：`0.144.1`
 - [x] `quick_validate.py`：`focus-coach`
 - [x] `python scripts/release_smoke.py`
 - [x] `git diff --check`
+- [x] reference promotion 新旧 skill 对比：旧版 6/8，候选版 8/8
 
 ## 行为验收
 
@@ -23,6 +24,10 @@ Codex CLI：`0.144.1`
 | 只有低强度出勤 | 更新活动与日历，不伪造 learning record 或掌握上涨 | PASS：只更新 progress，明确不写 record、不改变百分比 |
 | 多目标且已有现实目标 | focus-coach 做明确取舍并及时退出 | PASS：选择 TS + mini-claude，冻结算法与多 Agent，定义月底证据 |
 | 多目标且缺少决定性背景 | 只问一个短问题或明确临时假设 | PASS：明确声明无面试、无交付期限的临时假设和改线条件 |
+| 多条同主题 records | promotion 检查后合并为一篇稳定 reference | PASS：三条 Agent 消息记录合并，reference 与 records 双向追踪 |
+| 多条无关或冲突 records | 不按数量补 reference，保留候选缺失证据 | PASS：拒绝 5:5 对齐，冲突主题写入候选状态 |
+| 已有同主题 reference | 优先更新，不创建重复文档 | PASS：Promise 迁移证据合并到原 reference |
+| 单条强证据 record | 证据充分时允许直接 promotion | PASS：解释、Run、Debug 与迁移足以创建 reference |
 
 Forward tests 使用独立新 agent 读取候选 Skill；测试 prompt 只提供用户场景，不提供预期答案。
 

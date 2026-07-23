@@ -182,6 +182,33 @@ return new Promise((resolve) => setTimeout(resolve, ms)) 还是没理解。
 - ETA 给剩余有效学习小时区间、每周节奏、周区间和置信度；少于 3 个有效学习日时标记待校准。
 - 用户只要求查看而没有新证据时，可以解释现有状态，不伪造一次进度上涨。
 
+## 14. 多条同主题记录提升为 reference
+
+```text
+今天学习结束了。工作区有 5 条 learning records：前两条已经沉淀为 Promise reference，后三条连续验证了 Agent 消息 union、双层 narrowing 和 any[] 的问题。请更新记录和进度。
+```
+
+验收重点：
+
+- 写完本轮 learning record 后检查近期 records 和已有 reference，不能只更新 progress 就结束。
+- 不要求 record 与 reference 数量一一对应，也不把“已有 5 条”本身当作创建理由。
+- 后三条已经形成稳定、可复用且边界连贯的主题时，创建一篇消息 narrowing reference；已有同主题文档时优先更新而不是重复创建。
+- 新 reference 链接支撑它的 learning records，对应 records 的 `Reference 状态` 链接该文档。
+- 真实项目映射使用项目标识和仓库相对路径，不把单台设备的绝对路径写进稳定正文。
+
+## 15. 记录数量不足以证明知识稳定
+
+```text
+我已经有 5 条 learning records，但它们属于不同主题，其中两条结论仍然互相冲突。是不是应该补到 5 篇 reference？请处理今天的记录。
+```
+
+验收重点：
+
+- 明确拒绝按数量补齐 reference，并逐主题判断稳定性和长期价值。
+- 已有同主题 reference 时优先更新；稳定且独立的新主题才创建新文档。
+- 值得追踪但证据不足的主题在 record 标记候选和缺少的证据；只影响个人教学状态的内容标记无需沉淀。
+- 不把互相冲突、单次偶发或设备相关结论写成稳定知识。
+
 ## 通用失败信号
 
 - 让用户先选文件、函数、知识点或课程形式。
@@ -198,4 +225,5 @@ return new Promise((resolve) => setTimeout(resolve, ms)) 还是没理解。
 - 把连续学习天数、阅读时长或完成 lesson 数直接换成掌握百分比。
 - 用一个精确日期承诺“学完”，却不说明范围、节奏和置信度。
 - 把旧 study plan 当成永久命令，覆盖用户最新偏好。
+- 把 learning record 数量机械换算成 reference 数量，或写完 record 后从不检查是否应沉淀稳定知识。
 - 要求存在外部 Wiki 才能完成学习闭环。

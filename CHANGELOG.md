@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.0.1 - 2026-07-23
+
+### Fixed
+
+- 每次创建或更新 learning record 后检查是否应将稳定知识提升或合并到 reference，避免沉淀长期滞后。
+- reference promotion 使用证据质量和复用价值判断，不再让 record 数量隐式充当创建阈值。
+
+### Added
+
+- 为 learning record 增加已沉淀、候选及无需沉淀三种 Reference 状态。
+- reference 与支撑 records 双向追踪；已有同主题文档优先更新，未稳定候选保留缺失证据。
+- 稳定知识中的项目映射使用项目标识和仓库相对路径，设备绝对路径集中到 source 登记。
+- 增加 promotion 行为回归场景和静态契约校验。
+
 ## 2.0.0 - 2026-07-12
 
 ### Changed

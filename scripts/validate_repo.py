@@ -219,6 +219,28 @@ def validate_contracts(errors: list[str]) -> None:
         if "exercises/" in content:
             error(errors, f"{relative} contains legacy exercises directory")
 
+    promotion_contracts = {
+        "SKILL.md": (
+            "每次创建或更新 learning record 后",
+            "记录总数本身不能作为创建理由",
+            "优先更新已有 reference",
+        ),
+        "LEARNING-RECORD-FORMAT.md": (
+            "## Reference 状态",
+            "候选主题和缺失证据",
+        ),
+        "REFERENCE-FORMAT.md": (
+            "## Promotion 检查",
+            "不要要求两类文件数量一一对应",
+            "仓库相对路径",
+        ),
+    }
+    for filename, phrases in promotion_contracts.items():
+        content = (SKILLS_ROOT / "learning-coach" / filename).read_text(encoding="utf-8")
+        for phrase in phrases:
+            if phrase not in content:
+                error(errors, f"learning-coach/{filename} missing promotion contract: {phrase}")
+
 
 def validate_progress_contract(errors: list[str]) -> None:
     progress_format = (
