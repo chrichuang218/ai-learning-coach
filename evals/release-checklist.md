@@ -1,18 +1,19 @@
 # Release Acceptance
 
-当前候选版本：`2.0.1`
-最近执行日期：2026-07-23
+当前候选版本：`2.0.2`
+最近执行日期：2026-07-26
 Codex CLI：`0.144.1`
 状态：PASS（发布候选验证）
 
 ## 自动验证
 
 - [x] `python scripts/validate_repo.py`
-- [x] `quick_validate.py`：`learning-coach`
-- [x] `quick_validate.py`：`focus-coach`
+- [x] `python -X utf8 quick_validate.py`：`learning-coach`
+- [x] `python -X utf8 quick_validate.py`：`focus-coach`
 - [x] `python scripts/release_smoke.py`
 - [x] `git diff --check`
 - [x] reference promotion 新旧 skill 对比：旧版 6/8，候选版 8/8
+- [x] 教学粒度新旧 skill 对比：旧版 3/8，候选版 8/8
 
 ## 行为验收
 
@@ -28,6 +29,8 @@ Codex CLI：`0.144.1`
 | 多条无关或冲突 records | 不按数量补 reference，保留候选缺失证据 | PASS：拒绝 5:5 对齐，冲突主题写入候选状态 |
 | 已有同主题 reference | 优先更新，不创建重复文档 | PASS：Promise 迁移证据合并到原 reference |
 | 单条强证据 record | 证据充分时允许直接 promotion | PASS：解释、Run、Debug 与迁移足以创建 reference |
+| 连续两次“不知道” | 停止字段填空并恢复完整关系任务 | PASS：先用时间线讲清，再用双调用与单结果检验关联依据 |
+| 提示下局部答对 | 撤掉支架，回到减少提示的完整任务 | PASS：明确证据仍非独立掌握，并要求重建完整 `openaiMessages` 变化 |
 
 Forward tests 使用独立新 agent 读取候选 Skill；测试 prompt 只提供用户场景，不提供预期答案。
 
