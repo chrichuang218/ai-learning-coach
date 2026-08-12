@@ -339,10 +339,6 @@ python scripts/release_smoke.py
 
 项目演进见 [CHANGELOG.md](CHANGELOG.md)。
 
-## Star History
-
-[![Star History Chart](https://api.star-history.com/svg?repos=chrichuang218/ai-learning-coach&type=Date)](https://star-history.com/#chrichuang218/ai-learning-coach&Date)
-
 ## 贡献
 
 最有价值的贡献是现实中的 Skill 失败案例：错误触发、错误路由、让用户承担课程设计、忽略真实项目、解释没有改变心智模型，或者某个领域缺少合适反馈机制。
