@@ -33,8 +33,17 @@ jobs:
       - name: Validate repository
         run: python scripts/validate_repo.py
 
+      - name: Test Learning Lab projections and export boundaries
+        run: python -m unittest discover -s tests -v
+
+      - name: Install MCP test dependency
+        run: python -m pip install -r plugins/ai-learning-coach/mcp/requirements.txt
+
+      - name: Exercise MCP state and resume tools
+        run: python scripts/mcp_demo_smoke.py
+
       - name: Install Codex CLI
         run: npm install --global "@openai/codex@${CODEX_CLI_VERSION}"
 
       - name: Smoke test marketplace installation
-        run: python scripts/release_smoke.py
+        run: python scripts/release_smoke.py --protocol

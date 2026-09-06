@@ -1,42 +1,31 @@
 # Release Acceptance
 
-当前候选版本：`2.0.3`
-最近执行日期：2026-08-12
+当前候选版本：`2.1.0`
+最近执行日期：2026-09-06
 Codex CLI：`0.144.1`
-状态：PASS（发布候选验证）
+状态：PASS（2.1.0 工程发布验收；学习效果不作承诺）
 
-## 自动验证
+## 本次发布范围
 
-- [x] `python scripts/validate_repo.py`
-- [x] `python -X utf8 quick_validate.py`：`learning-coach`
-- [x] `python -X utf8 quick_validate.py`：`focus-coach`
-- [x] `python scripts/release_smoke.py`
-- [x] `git diff --check`
-- [x] reference promotion 新旧 skill 对比：旧版 6/8，候选版 8/8
-- [x] 教学粒度新旧 skill 对比：旧版 3/8，候选版 8/8
+真实源码首次体验、证据与恢复参考、状态诊断、可选只读 HTML 与手动成果导出。
+Markdown 仍是事实源；MCP 的隔离打卡不会写入正式日历或掌握状态。
 
-## 行为验收
+## 发布验证
 
-| 场景 | 预期 | 结果 |
-| --- | --- | --- |
-| 已有工作区时开始学习 | 读取真实项目，只给一个动作或问题 | PASS：直接进入 `chatAnthropic()` 的 memory prefetch 单一问题 |
-| 用户连续追问一个异步概念 | 直接回答并换维度，不展开完整课程 | PASS：使用命名展开、时间线和 Java 对照，最后只留一个判断问题 |
-| 用户查看目标、项目进度和 ETA | 分开进度，说明区间、节奏与置信度 | PASS：返回 55% / 15%、小时与周区间，并说明低置信度 |
-| 只有低强度出勤 | 更新活动与日历，不伪造 learning record 或掌握上涨 | PASS：只更新 progress，明确不写 record、不改变百分比 |
-| 多目标且已有现实目标 | focus-coach 做明确取舍并及时退出 | PASS：选择 TS + mini-claude，冻结算法与多 Agent，定义月底证据 |
-| 多目标且缺少决定性背景 | 只问一个短问题或明确临时假设 | PASS：明确声明无面试、无交付期限的临时假设和改线条件 |
-| 多条同主题 records | promotion 检查后合并为一篇稳定 reference | PASS：三条 Agent 消息记录合并，reference 与 records 双向追踪 |
-| 多条无关或冲突 records | 不按数量补 reference，保留候选缺失证据 | PASS：拒绝 5:5 对齐，冲突主题写入候选状态 |
-| 已有同主题 reference | 优先更新，不创建重复文档 | PASS：Promise 迁移证据合并到原 reference |
-| 单条强证据 record | 证据充分时允许直接 promotion | PASS：解释、Run、Debug 与迁移足以创建 reference |
-| 连续两次“不知道” | 停止字段填空并恢复完整关系任务 | PASS：先用时间线讲清，再用双调用与单结果检验关联依据 |
-| 提示下局部答对 | 撤掉支架，回到减少提示的完整任务 | PASS：明确证据仍非独立掌握，并要求重建完整 `openaiMessages` 变化 |
+- 仓库静态校验：manifest、Skill 合同、链接、空白字符与版本一致性。
+- Learning Core / 导出：23 项确定性测试。
+- Codex 隔离安装及已安装缓存中的 MCP 五工具往返。
+- 两个 Skill 的元数据检查与插件结构检查。
+- 本日已完成固定源码首次体验 prepare/check、目标 Green → Red → Green。
+- 本日已完成桌面/手机宽度、演示控制和证据展开检查；这些代码随后未改变。
 
-Forward tests 使用独立新 agent 读取候选 Skill；测试 prompt 只提供用户场景，不提供预期答案。
+## 行为与证据边界
 
-## 发布条件
+- “运行给定测试”场景的新旧版本均保留帮助程度，不升级为独立设计。
+- 两种 context-only 场景的新旧版本均为 5/6；缺少源码的场景未证明实际读取顺序，原始评分保持不变。
+- 已另用真实固定版本读本完成一次恢复集成：先读取学习现场、验证 HEAD/工作区状态和 symbol，再给一个预测动作。该执行补充了源码读取路径的证据，不代表跨模型稳定性。
+- 八场景输入包中仅上述两种完成新旧对照，其余没有宣称运行。真人学习效果、七日复用和 Star 增长不属于已验证结论。
 
-- 自动验证全部通过。
-- 行为验收全部通过，没有 P1/P2 未解决发现。
-- `CHANGELOG.md`、plugin manifest 和 Git tag 使用同一版本。
-- 发布提交不包含私人路径、密钥、临时文件或无关改动。
+工程缺陷已修复并纳入测试；本版本不以模型比较分数或真人效果作为宣传承诺。详见 [候选优化与验证](../docs/validation/2026-09-06-improvements.md)、[原始评分](results/2026-09-06/benchmark.json) 和 [恢复集成](results/2026-09-06/resume-integration.md)。
+
+[2.0.3 历史验收](history/2.0.3-release-checklist.md) 保留原样，不作为本版本的运行结果。

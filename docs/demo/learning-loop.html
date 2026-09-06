@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI Learning Coach · 一次真实源码学习</title>
+<style>
+:root{color-scheme:light;--paper:#f6f4ed;--ink:#183b34;--muted:#56685e;--line:#d4dbd0;--accent:#dfff78}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC",sans-serif;line-height:1.6}main{max-width:1180px;margin:auto;padding:30px 44px}.top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:19px}.brand{font:700 23px Georgia,serif}.badge{font-size:12px;border:1px solid var(--line);border-radius:20px;padding:4px 12px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--muted)}.body{display:grid;grid-template-columns:1fr 1.1fr;gap:50px;padding:38px 0 26px;min-height:422px}.number{font:75px Georgia,serif;color:#9eb18b;line-height:1}h1{font-size:36px;line-height:1.4;letter-spacing:-1px;margin:15px 0}p{font-size:15px;color:var(--muted);max-width:420px}.stage{background:var(--ink);color:var(--paper);padding:28px 30px;border-radius:3px;align-self:start;min-height:300px}.stage .eyebrow{color:var(--accent)}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:15px/1.9 Consolas,"Microsoft YaHei",monospace;margin:28px 0 22px}.note{border-top:1px solid #49665b;padding-top:16px;color:#d3dfcc;font-size:12px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;border-top:1px solid var(--line);padding-top:20px}.step{border:0;border-top:3px solid transparent;background:transparent;text-align:left;font:14px "Microsoft YaHei",sans-serif;color:var(--muted);padding:12px 0;cursor:pointer}.step[aria-current="step"]{border-color:var(--ink);color:var(--ink);font-weight:700}.step small{display:block;font-weight:400;margin-top:5px;font-size:11px}footer{display:flex;justify-content:space-between;align-items:center;gap:16px;font-size:11px;color:var(--muted);padding-top:14px}.controls{display:flex;gap:10px}button.control{border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 12px;cursor:pointer;border-radius:3px}button:focus-visible{outline:2px solid var(--ink);outline-offset:3px}@media(max-width:700px){main{padding:22px}.body{grid-template-columns:1fr;gap:20px;padding-top:24px}.number{font-size:48px}h1{font-size:28px}.stage{min-height:270px}.steps{gap:8px}.step{font-size:12px}.badge{font-size:10px}footer{align-items:start;flex-direction:column}}
+</style>
+</head>
+<body><main>
+<div class="top"><span class="brand">AI Learning Coach ↗</span><span class="badge">真实源码 · 学习过程重演</span></div>
+<section class="body" aria-live="polite"><div><div class="eyebrow">LEARN TYPESCRIPT THROUGH A REAL AGENT</div><div class="number" id="number">01</div><h1 id="title">先预测，再看答案。</h1><p id="description"></p></div><div class="stage"><div class="eyebrow" id="label"></div><pre id="code"></pre><div class="note" id="note"></div></div></section>
+<nav class="steps" aria-label="演示步骤"><button class="step" data-step="0">01 · 预测<small>先暴露自己的理解</small></button><button class="step" data-step="1">02 · 观察<small>用真实运行校准</small></button><button class="step" data-step="2">03 · 留下证据<small>帮助程度也记下来</small></button><button class="step" data-step="3">04 · 回来继续<small>从正确入口接上</small></button></nav>
+<footer><span>mini-claude / 缓存失效 · 基于真实案例改编，非真人试用录像</span><div class="controls"><button class="control" id="previous" aria-label="上一步">←</button><button class="control" id="play">播放 48 秒重演</button><button class="control" id="next" aria-label="下一步">→</button></div></footer>
+</main>
+<script>
+const frames = [
+ {title:'先预测，再看答案。',description:'从一个能动手的小切片开始。教练先读真实源码，让你预测一段完整的控制流。',label:'01 / 你的第一个动作',code:'第一次扫描：目录为空\n然后：新增一个 Skill 文件\n再次调用：discoverSkills()\n\n你预测这次会返回什么？',note:'先说出依据，再去观察。一次只推进一个有意义的动作。'},
+ {title:'让真实运行解释差异。',description:'同一进程会复用缓存快照。测试把文件变化和缓存重置分开，让差异可以观察。',label:'02 / 固定版本 · 目标测试',code:'首次读取          → 0 个\n新增文件，再读取  → 仍为 0 个\n重置缓存，再读取  → 发现新 Skill\n\n目标测试：1 pass / 0 fail',note:'测试真实可复现。临时让 reset 成为 no-op，会得到目标 Red。'},
+ {title:'记住成果，也记住边界。',description:'亲自运行测试是一项证据。独立设计测试，则需要另一项证据。',label:'03 / 学习记录 · 示意',code:'观察：运行目标测试并比较结果\n帮助：测试与断言由教练提供\n状态：提示下完成\n待验证：独立设计相邻场景的测试',note:'不会因为“跑通了”就把独立设计标为掌握。'},
+ {title:'过几天回来，接着学。',description:'教练读取最近证据，重新核对当前源码。你不用重讲背景，也不用从语法第一课重新开始。',label:'04 / 下一处真实入口',code:'继续上次的缓存学习。\n\n这次把“新增文件”换成\n“修改已有 Skill 的内容”。\n你会怎样预测并验证？',note:'历史证据保留。当前入口重新定位，下一步由真实表现决定。'}
+];
+let index=0,timer=null;
+function showFrame(next){index=(next+frames.length)%frames.length;const frame=frames[index];document.getElementById('number').textContent=String(index+1).padStart(2,'0');for(const key of ['title','description','label','code','note'])document.getElementById(key).textContent=frame[key];document.querySelectorAll('.step').forEach((el,i)=>{if(i===index)el.setAttribute('aria-current','step');else el.removeAttribute('aria-current')});}
+function stop(){clearInterval(timer);timer=null;document.getElementById('play').textContent='播放 48 秒重演';}
+document.getElementById('play').addEventListener('click',()=>{if(timer){stop();return;}showFrame(0);document.getElementById('play').textContent='暂停';timer=setInterval(()=>{if(index===3){stop();return;}showFrame(index+1)},12000)});
+document.getElementById('previous').addEventListener('click',()=>{stop();showFrame(index-1)});document.getElementById('next').addEventListener('click',()=>{stop();showFrame(index+1)});document.querySelectorAll('.step').forEach(el=>el.addEventListener('click',()=>{stop();showFrame(Number(el.dataset.step))}));document.addEventListener('keydown',event=>{if(event.key==='ArrowRight'){stop();showFrame(index+1)}else if(event.key==='ArrowLeft'){stop();showFrame(index-1)}});showFrame(0);
+</script>
+</body></html>

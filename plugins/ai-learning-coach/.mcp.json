@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "learning-lab-demo": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["-X", "utf8", "mcp/learning_lab_demo.py"],
+      "cwd": "."
+    }
+  }
+}

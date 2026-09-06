@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+import subprocess
 from pathlib import Path
 
 import yaml
@@ -22,6 +23,16 @@ REQUIRED_FILES = (
     "plugins/ai-learning-coach/skills/learning-coach/REFERENCE-FORMAT.md",
     "plugins/ai-learning-coach/skills/learning-coach/LEARNER-BACKGROUND-FORMAT.md",
     "plugins/ai-learning-coach/skills/learning-coach/PROGRESS-FORMAT.md",
+    "plugins/ai-learning-coach/.mcp.json",
+    "plugins/ai-learning-coach/mcp/learning_lab_demo.py",
+    "plugins/ai-learning-coach/mcp/README.md",
+    "plugins/ai-learning-coach/mcp/learning_core.py",
+    "plugins/ai-learning-coach/mcp/progress_view.py",
+    "plugins/ai-learning-coach/skills/learning-coach/RESUME.md",
+    "plugins/ai-learning-coach/skills/learning-coach/EVIDENCE-FORMAT.md",
+    "examples/first-session/README.md",
+    "scripts/first_session.py",
+    "scripts/learning_lab.py",
     "examples/workspaces/minimal-multitrack/PROGRESS.md",
     "examples/workspaces/minimal-multitrack/learning-records/typescript-agent/ts-agent-0000-foundation-baseline.md",
     "scripts/release_smoke.py",
@@ -46,6 +57,13 @@ NO_EXERCISE_PATH_DOCS = (
 
 def error(errors: list[str], message: str) -> None:
     errors.append(message)
+
+
+def repository_files() -> list[Path]:
+    """Honor ignored verification runs and dependency caches, including new source files."""
+    result = subprocess.run(["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+                            cwd=ROOT, capture_output=True, check=True)
+    return [ROOT / name for name in result.stdout.decode("utf-8").split("\0") if name and (ROOT / name).is_file()]
 
 
 def read_yaml(path: Path, errors: list[str]) -> object | None:
@@ -137,11 +155,25 @@ def validate_plugin_manifests(errors: list[str]) -> None:
             error(errors, "plugin.json: version must be valid SemVer")
         else:
             changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-            release_heading = rf"^## {re.escape(version)} - \d{{4}}-\d{{2}}-\d{{2}}$"
+            release_version = version.split("+", 1)[0]
+            release_heading = rf"^## {re.escape(release_version)} - \d{{4}}-\d{{2}}-\d{{2}}$"
             if not re.search(release_heading, changelog, re.MULTILINE):
-                error(errors, f"CHANGELOG.md: missing dated release heading for {version}")
+                error(
+                    errors,
+                    f"CHANGELOG.md: missing dated release heading for {release_version}",
+                )
         if manifest.get("skills") != "./skills/":
             error(errors, "plugin.json: skills must point to ./skills/")
+        if manifest.get("mcpServers") != "./.mcp.json":
+            error(errors, "plugin.json: mcpServers must point to ./.mcp.json")
+
+        mcp_config = read_json(PLUGIN_ROOT / ".mcp.json", errors)
+        if not isinstance(mcp_config, dict):
+            error(errors, ".mcp.json: expected an object")
+        elif not isinstance(mcp_config.get("mcpServers"), dict) or set(
+            mcp_config["mcpServers"]
+        ) != {"learning-lab-demo"}:
+            error(errors, ".mcp.json: expected exactly the learning-lab-demo server")
 
         interface = manifest.get("interface")
         if not isinstance(interface, dict):
@@ -185,7 +217,7 @@ def validate_markdown_links(errors: list[str]) -> None:
     link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
     ignored_prefixes = ("http://", "https://", "mailto:", "#", "~/")
 
-    for path in ROOT.rglob("*.md"):
+    for path in (p for p in repository_files() if p.suffix == ".md"):
         content = path.read_text(encoding="utf-8")
         for target in link_pattern.findall(content):
             target = target.strip().strip("<>")
@@ -290,19 +322,25 @@ def validate_release_contract(errors: list[str]) -> None:
         if field not in source:
             error(errors, f"example mini-claude source missing field: {field}")
 
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme = (ROOT / "docs" / "install.md").read_text(encoding="utf-8")
     expected_list_command = "codex plugin list --json --marketplace ai-learning-coach --available"
     if expected_list_command not in readme:
-        error(errors, "README.md: marketplace list smoke must use --json with --available")
+        error(errors, "docs/install.md: marketplace list smoke must use --json with --available")
 
     checklist = (ROOT / "evals" / "release-checklist.md").read_text(encoding="utf-8")
+    version = json.loads((PLUGIN_ROOT / ".codex-plugin/plugin.json").read_text(encoding="utf-8"))["version"].split("+", 1)[0]
+    if "-" in version:
+        # A development candidate can be validated without pretending its human release gate passed.
+        return
+    if f"当前候选版本：`{version}`" not in checklist:
+        error(errors, "evals/release-checklist.md: stable release must have matching acceptance version")
     if "状态：PASS" not in checklist or "待执行" in checklist:
         error(errors, "evals/release-checklist.md: release acceptance is not complete")
 
 
 def validate_trailing_whitespace(errors: list[str]) -> None:
     checked_suffixes = {".json", ".md", ".py", ".yaml", ".yml"}
-    for path in ROOT.rglob("*"):
+    for path in repository_files():
         if not path.is_file() or path.suffix not in checked_suffixes:
             continue
         for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):

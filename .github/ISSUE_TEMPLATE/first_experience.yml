@@ -1,0 +1,34 @@
+name: First learning session
+description: 第一次使用成功了，或卡住了？留下最短反馈。
+title: "[First session] "
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: 你想学什么？
+      placeholder: 我会 Java，想通过真实 Agent 项目开始学 TypeScript。
+    validations:
+      required: true
+  - type: dropdown
+    id: step
+    attributes:
+      label: 做到了哪一步？
+      options:
+        - 安装插件时卡住
+        - 新会话没有触发教练
+        - 准备读本或运行测试时卡住
+        - 能开始，但讲解或提问没帮我理解
+        - 完成了一次预测、运行或解释
+        - 第二次回来继续学习
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: 一句话描述结果（可选）
+      description: 可以贴匿名报错或一个学会的具体行为；请删除密钥、私人代码、路径和个人信息。
+  - type: input
+    id: environment
+    attributes:
+      label: 系统、客户端和版本（可选）
+      placeholder: Windows / Codex CLI 0.144.1

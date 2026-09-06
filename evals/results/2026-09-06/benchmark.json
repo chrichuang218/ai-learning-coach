@@ -1,0 +1,168 @@
+{
+  "metadata": {
+    "skill_name": "learning-coach",
+    "executor_model": "exact model unavailable; inherited parent model, no override",
+    "timestamp": "2026-09-06",
+    "evals_run": [
+      1,
+      2
+    ],
+    "runs_per_configuration": 1,
+    "candidate": "2.1.0-dev.1",
+    "baseline": "pre-edit 2.0.3 skill snapshot",
+    "grading": "maintainer-agent semantic review; not a blinded human study"
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "eval_name": "resume-drift",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 2,
+        "failed": 1,
+        "total": 3,
+        "pass_rate": 0.6666666666666666,
+        "time_seconds": null,
+        "tokens": null
+      },
+      "expectations": [
+        {
+          "text": "较新证据优先于旧 README 日期，不从第一课重讲",
+          "passed": true,
+          "evidence": "原始输出：接着上次的缓存检查点"
+        },
+        {
+          "text": "不把旧快照连续 1 天直接说成今天的连续天数",
+          "passed": true,
+          "evidence": "原始输出：截至今天 2026-09-06 的连续学习和本周统计需按真实活动记录重算"
+        },
+        {
+          "text": "区分运行证据与独立设计，先核对源码再选一个动作",
+          "passed": false,
+          "evidence": "原始输出：当前源码还没重新核验。回复在实际源码核验前给出假设推演；严格“先核验再选动作”未证明。此 context-only probe 未提供源码，不能据此认定真实会话必然失败。"
+        }
+      ]
+    },
+    {
+      "eval_id": 1,
+      "eval_name": "resume-drift",
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 2,
+        "failed": 1,
+        "total": 3,
+        "pass_rate": 0.6666666666666666,
+        "time_seconds": null,
+        "tokens": null
+      },
+      "expectations": [
+        {
+          "text": "较新证据优先于旧 README 日期，不从第一课重讲",
+          "passed": true,
+          "evidence": "原始输出：接着上次“修改已有 Skill 内容后，预测缓存结果”"
+        },
+        {
+          "text": "不把旧快照连续 1 天直接说成今天的连续天数",
+          "passed": true,
+          "evidence": "原始输出：不能将 9 月 1 日的连续 1 天直接延续到 9 月 6 日"
+        },
+        {
+          "text": "区分运行证据与独立设计，先核对源码再选一个动作",
+          "passed": false,
+          "evidence": "原始输出：当前源码还没重新核验。回复在实际源码核验前给出假设推演；严格“先核验再选动作”未证明。此 context-only probe 未提供源码，不能据此认定真实会话必然失败。"
+        }
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "guided-test",
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "pass_rate": 1.0,
+        "time_seconds": null,
+        "tokens": null
+      },
+      "expectations": [
+        {
+          "text": "确认真实运行结果，但不承认或记录未发生的独立设计",
+          "passed": true,
+          "evidence": "原始输出：目前还没有证据支持“独立设计测试”"
+        },
+        {
+          "text": "保持需提示状态或明确不升级",
+          "passed": true,
+          "evidence": "原始输出：仍保持“需提示”"
+        },
+        {
+          "text": "明确保存帮助程度或独立设计待验证边界",
+          "passed": true,
+          "evidence": "原始输出：测试设计由教练提供，独立设计能力待验证"
+        }
+      ]
+    },
+    {
+      "eval_id": 2,
+      "eval_name": "guided-test",
+      "configuration": "old_skill",
+      "run_number": 1,
+      "result": {
+        "passed": 3,
+        "failed": 0,
+        "total": 3,
+        "pass_rate": 1.0,
+        "time_seconds": null,
+        "tokens": null
+      },
+      "expectations": [
+        {
+          "text": "确认真实运行结果，但不承认或记录未发生的独立设计",
+          "passed": true,
+          "evidence": "原始输出：目前还不能写成“独立设计测试”"
+        },
+        {
+          "text": "保持需提示状态或明确不升级",
+          "passed": true,
+          "evidence": "原始输出：继续保持“需提示”"
+        },
+        {
+          "text": "明确保存帮助程度或独立设计待验证边界",
+          "passed": true,
+          "evidence": "原始输出：设计输入、观察字段、断言均由教练提供"
+        }
+      ]
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.8333333333333334,
+        "stddev": 0.23570226,
+        "min": 0.6666666666666666,
+        "max": 1
+      }
+    },
+    "old_skill": {
+      "pass_rate": {
+        "mean": 0.8333333333333334,
+        "stddev": 0.23570226,
+        "min": 0.6666666666666666,
+        "max": 1
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.00"
+    }
+  },
+  "notes": [
+    "两组均为5/6；没有证明候选优于旧版。",
+    "源码核验顺序在当前无源码的 probe 中未能证明，按严格判据记未通过；需要真实文件集成验证。",
+    "精确模型ID、完整耗时和tokens不可得，保留null，未填零。",
+    "工程测试另行验证状态计算、保护和MCP数据流；不等于真人学习效果。"
+  ]
+}
