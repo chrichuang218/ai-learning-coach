@@ -23,10 +23,6 @@ def resolve_lab(lab_path: str) -> Path:
     return lab
 
 
-def read_utf8(path: Path) -> str:
-    return path.read_text(encoding="utf-8-sig")
-
-
 def first_match(pattern: str, text: str) -> str | None:
     match = re.search(pattern, text, re.M)
     return match.group(1).strip() if match else None
@@ -234,7 +230,7 @@ def get_snapshot(lab_path: str, as_of: str | None = None) -> dict:
                 issue(issues, "missing_file", f"missing {path.name}", path.name)
             continue
         try:
-            docs[path] = read_utf8(path)
+            docs[path] = path.read_text(encoding="utf-8-sig")
         except (OSError, UnicodeError) as exc:
             issue(issues, "unreadable_file", str(exc), path.relative_to(lab).as_posix())
     progress = docs.get(lab / "PROGRESS.md", "")

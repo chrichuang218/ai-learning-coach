@@ -25,29 +25,18 @@ def run_codex(codex: str, args: list[str], env: dict[str, str]) -> str:
     printable = subprocess.list2cmdline(command)
     print(f"$ {printable}")
 
-    if os.name == "nt" and codex.lower().endswith((".cmd", ".bat")):
-        completed = subprocess.run(
-            printable,
-            cwd=ROOT,
-            env=env,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            shell=True,
-            check=False,
-        )
-    else:
-        completed = subprocess.run(
-            command,
-            cwd=ROOT,
-            env=env,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            errors="replace",
-            check=False,
-        )
+    use_shell = os.name == "nt" and codex.lower().endswith((".cmd", ".bat"))
+    completed = subprocess.run(
+        printable if use_shell else command,
+        cwd=ROOT,
+        env=env,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        shell=use_shell,
+        check=False,
+    )
 
     if completed.stdout.strip():
         print(completed.stdout.strip())
