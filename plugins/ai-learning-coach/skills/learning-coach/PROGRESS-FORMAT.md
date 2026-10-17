@@ -4,6 +4,7 @@
 
 ## 目录
 
+- [事实与派生](#事实与派生)
 - [何时创建](#何时创建)
 - [推荐模板](#推荐模板)
 - [掌握状态](#掌握状态)
@@ -29,6 +30,16 @@ PROGRESS.md
 ```
 
 出勤不等于掌握。打卡、阅读时长、lesson 数量和文件数量都不能直接提高目标进度或项目进度。
+
+## 事实与派生
+
+只有里程碑表、最近活动、ETA 文字和下一检查点需要手写。快照百分比、“原始加权进度”行和整个学习节奏区都是派生值：
+
+- 有 `learning-lab` MCP 时，用 `set_milestone_state` 改状态（证据不支持会被拒绝），之后由 `sync_progress` 重算；不要手改这些数字。
+- 不写手工日历时，学习节奏由最近活动表、学习证据的 `observed_at` 和打卡事件派生，`sync_progress` 会生成节奏区。已有手工日历继续有效；日历标为空白、但当天有证据时会提示 `calendar_missing_activity`。
+- 没有工具时按下文手动维护，规则相同。
+
+用户用英文学习时可以使用英文字段，工具同样读取：`Updated:`、`Current mainline:`、`Tracking since:`、`## Snapshot`、`## Goal progress`、`## <name> scope progress`、`## Rhythm`、`## Estimate`、`## Recent activity`、`## Next checkpoint`；状态写作 `Not started 0%`、`Exposed 25%`、`Prompted 50%`、`Independent 75%`、`Transferred 100%`。
 
 ## 何时创建
 

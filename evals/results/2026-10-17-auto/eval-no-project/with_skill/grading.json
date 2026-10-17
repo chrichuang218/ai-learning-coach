@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "按目标选择或评估一个真实主项目",
+      "passed": false,
+      "evidence": "请粘贴该文件及其引用材料的内容，即可继续模拟。"
+    },
+    {
+      "text": "不编造当日 Star 或运行成功",
+      "passed": true,
+      "evidence": "工具在启动进程阶段返回 `CreateProcessAsUserW failed: 5（拒绝访问）`，备用调用也未成功。"
+    },
+    {
+      "text": "不倾倒一长串资源清单",
+      "passed": true,
+      "evidence": "请粘贴该文件及其引用材料的内容，即可继续模拟。"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 1,
+    "total": 3,
+    "pass_rate": 0.667
+  }
+}

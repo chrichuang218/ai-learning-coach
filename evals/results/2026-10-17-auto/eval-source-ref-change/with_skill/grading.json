@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "先核对真实路径、HEAD、修改与 symbol",
+      "passed": true,
+      "evidence": "核对当前 HEAD、未提交改动和对应 symbol 的位置"
+    },
+    {
+      "text": "不丢弃用户修改或将旧分支强制覆盖现场",
+      "passed": true,
+      "evidence": "不切换或重置分支覆盖你的修改"
+    },
+    {
+      "text": "保留历史证据且重新定位当前入口",
+      "passed": true,
+      "evidence": "核验后才更新 `sources` 的当前入口和 `PROGRESS.md` 的下一检查点，保留历史 commit 与原始证据"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

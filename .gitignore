@@ -18,3 +18,4 @@ __pycache__/
 .pytest_cache/
 .verification/
 .learning-coach-prototype/
+.learning-coach/

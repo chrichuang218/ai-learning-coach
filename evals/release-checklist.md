@@ -1,31 +1,25 @@
 # Release Acceptance
 
-当前候选版本：`2.1.0`
-最近执行日期：2026-09-06
-Codex CLI：`0.144.1`
-状态：PASS（2.1.0 工程发布验收；学习效果不作承诺）
+当前候选版本：`2.2.0`
+最近执行日期：2026-10-17
+Codex CLI：`0.144.1`（CI 基线）；本机安装冒烟使用 `0.160.0`
+状态：PASS（2.2.0 工程发布验收；学习效果不作承诺）
 
 ## 本次发布范围
 
-真实源码首次体验、证据与恢复参考、状态诊断、可选只读 HTML 与手动成果导出。
-Markdown 仍是事实源；MCP 的隔离打卡不会写入正式日历或掌握状态。
+经过校验的状态写入（证据、里程碑状态、派生进度、打卡）、间隔复习与周复盘、非代码证据、英文 Learning Lab、uv 启动的 MCP、Claude Code 插件清单、起步路线目录、精简后的 learning-coach Skill 与自动行为评估脚本。Markdown 仍是事实源。
 
 ## 发布验证
 
-- 仓库静态校验：manifest、Skill 合同、链接、空白字符与版本一致性。
-- Learning Core / 导出：23 项确定性测试。
-- Codex 隔离安装及已安装缓存中的 MCP 五工具往返。
-- 两个 Skill 的元数据检查与插件结构检查。
-- 本日已完成固定源码首次体验 prepare/check、目标 Green → Red → Green。
-- 本日已完成桌面/手机宽度、演示控制和证据展开检查；这些代码随后未改变。
+- 仓库静态校验：Codex 与 Claude Code 清单、两份 MCP 启动配置、Skill 合同、链接、空白字符与版本一致性。
+- Learning Core / 写入 / 导出：34 项确定性测试，其中 11 项覆盖写入拒绝规则、派生节奏、复习队列、周复盘、英文档案与非代码证据。
+- MCP 十工具往返：进程内启动，以及完全按 Codex（`.codex-mcp.json`）和 Claude Code（`.mcp.json`）配置经 uv 启动。
+- Codex 隔离安装：插件缓存文件齐全，并在已安装缓存中按 uv 真实启动方式跑通十个工具；`codex mcp list` 确认只注册声明的 `learning-lab` 服务器。
 
 ## 行为与证据边界
 
-- “运行给定测试”场景的新旧版本均保留帮助程度，不升级为独立设计。
-- 两种 context-only 场景的新旧版本均为 5/6；缺少源码的场景未证明实际读取顺序，原始评分保持不变。
-- 已另用真实固定版本读本完成一次恢复集成：先读取学习现场、验证 HEAD/工作区状态和 symbol，再给一个预测动作。该执行补充了源码读取路径的证据，不代表跨模型稳定性。
-- 八场景输入包中仅上述两种完成新旧对照，其余没有宣称运行。真人学习效果、七日复用和 Star 增长不属于已验证结论。
+- 自动行为评估三轮记录见 [2026-10-17 自动评估](../docs/validation/2026-10-17-auto-evals.md)：第一轮 12 场景 89%，失败主要来自 Windows 沙箱无法读取 Skill；修正提示方式与 Skill 后，复跑的 3 个场景 9/9。其余 8 个场景未在最终 Skill 上复验。
+- 作答与评分为同一模型，结论需人工抽查；这是 context-only 探针，不代表真实文件读写或真人教学。
+- 未验证：Claude Code 的实际插件安装流程、真实 Codex 对话中的 MCP 调用（`codex_mcp_demo_smoke.py`）、Cursor / Gemini CLI 等手动配置、起步路线中除 TypeScript Agent 外各仓库的运行命令。真人学习效果、七日复用和 Star 增长不属于已验证结论。
 
-工程缺陷已修复并纳入测试；本版本不以模型比较分数或真人效果作为宣传承诺。详见 [候选优化与验证](../docs/validation/2026-09-06-improvements.md)、[原始评分](results/2026-09-06/benchmark.json) 和 [恢复集成](results/2026-09-06/resume-integration.md)。
-
-[2.0.3 历史验收](history/2.0.3-release-checklist.md) 保留原样，不作为本版本的运行结果。
+[2.1.0 历史验收](history/2.1.0-release-checklist.md) 与 [2.0.3 历史验收](history/2.0.3-release-checklist.md) 保留原样，不作为本版本的运行结果。

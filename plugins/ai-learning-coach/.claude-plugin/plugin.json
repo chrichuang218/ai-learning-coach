@@ -1,0 +1,20 @@
+{
+  "name": "ai-learning-coach",
+  "version": "2.2.0",
+  "description": "AI private learning coach: learn through real projects, one action at a time, with evidence-based mastery, spaced review and visible progress.",
+  "author": {
+    "name": "chrichuang218",
+    "url": "https://github.com/chrichuang218"
+  },
+  "homepage": "https://github.com/chrichuang218/ai-learning-coach#readme",
+  "repository": "https://github.com/chrichuang218/ai-learning-coach",
+  "license": "MIT",
+  "keywords": [
+    "learning",
+    "coaching",
+    "education",
+    "source-code",
+    "deliberate-practice",
+    "spaced-repetition"
+  ]
+}

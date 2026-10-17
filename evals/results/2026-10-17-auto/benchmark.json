@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-17",
+  "agent": "codex exec --skip-git-repo-check --sandbox read-only --color never -",
+  "judge": "codex exec --skip-git-repo-check --sandbox read-only --color never -",
+  "pass_rate": 0.889,
+  "cases": [
+    {
+      "id": 1,
+      "name": "resume-drift",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 2,
+      "name": "guided-test",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 3,
+      "name": "source-ref-change",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 4,
+      "name": "java-first-session",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 5,
+      "name": "no-project",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 6,
+      "name": "repeated-confusion",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 7,
+      "name": "attendance-only",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 8,
+      "name": "retention-failure",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 9,
+      "name": "review-due",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 10,
+      "name": "english-learner",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 11,
+      "name": "non-code-evidence",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    },
+    {
+      "id": 12,
+      "name": "weekly-recap",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    }
+  ]
+}

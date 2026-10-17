@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "先处理到期复习，而不是直接进入新的 memory 主题",
+      "passed": true,
+      "evidence": "今天先补一次“缓存失效”的复习，再继续追踪 memory prefetch。"
+    },
+    {
+      "text": "复习形式是一次不看提示的回忆、预测或独立设计，而不是重讲",
+      "passed": true,
+      "evidence": "如果缓存失效逻辑被删掉，你会怎样设计一个测试，让这个错误暴露出来？"
+    },
+    {
+      "text": "说明复习结果会作为新证据记录，不预先认定成功",
+      "passed": true,
+      "evidence": "收到你的测试设计并评估后，才有依据记录复习结果；现在不标记掌握、不顺延复习日期、不推进检查点。"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

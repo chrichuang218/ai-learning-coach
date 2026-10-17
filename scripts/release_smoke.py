@@ -56,7 +56,8 @@ def find_plugin(items: list[object]) -> dict[str, object] | None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--protocol", action="store_true", help="Also exercise the installed cache's MCP server; requires mcp")
+    parser.add_argument("--protocol", action="store_true",
+                        help="Also exercise the installed cache's MCP server; requires mcp, and uses the real uv launch when uv is on PATH")
     args = parser.parse_args()
     codex = shutil.which("codex")
     if codex is None:
@@ -107,8 +108,8 @@ def main() -> int:
             cache_root / "skills" / "learning-coach" / "SKILL.md",
             cache_root / "skills" / "learning-coach" / "PROGRESS-FORMAT.md",
             cache_root / "skills" / "focus-coach" / "SKILL.md",
-            cache_root / ".mcp.json",
-            cache_root / "mcp" / "learning_lab_demo.py",
+            cache_root / ".codex-mcp.json",
+            cache_root / "mcp" / "server.py",
             cache_root / "mcp" / "learning_core.py",
             cache_root / "mcp" / "progress_view.py",
             cache_root / "skills" / "learning-coach" / "RESUME.md",
@@ -119,11 +120,11 @@ def main() -> int:
             raise RuntimeError(f"Installed plugin cache is missing files: {missing}")
         if args.protocol:
             from mcp_demo_smoke import run_smoke
-            asyncio.run(run_smoke(cache_root / "mcp" / "learning_lab_demo.py"))
+            asyncio.run(run_smoke(cache_root / "mcp" / "server.py", "codex" if shutil.which("uv") else None))
 
     print(
         f"Release smoke passed: {PLUGIN_ID} {version} installed with both skills "
-        "and the Learning Lab MCP prototype."
+        "and the Learning Lab MCP server."
     )
     return 0
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a real Codex turn through the installed prototype MCP server."""
+"""Run a real Codex turn through the installed Learning Lab MCP server."""
 
 from __future__ import annotations
 
@@ -34,11 +34,11 @@ def main() -> int:
     if codex is None:
         raise RuntimeError("Codex CLI is not available on PATH")
 
-    with tempfile.TemporaryDirectory(prefix="codex-learning-lab-prototype-") as temp:
+    with tempfile.TemporaryDirectory(prefix="codex-learning-lab-") as temp:
         lab = Path(temp)
         create_lab(lab)
         prompt = (
-            "Use the learning-lab-demo MCP tools. "
+            "Use the learning-lab MCP tools. "
             f"First read the learning snapshot at {lab}. "
             "Then record a 2026-09-03 run-level check-in with note "
             "'real Codex MCP round trip'. Finally list check-ins and report the "
@@ -52,7 +52,7 @@ def main() -> int:
             "--sandbox",
             "read-only",
             "--config",
-            'plugins."ai-learning-coach".mcp_servers."learning-lab-demo".default_tools_approval_mode="approve"',
+            'plugins."ai-learning-coach".mcp_servers."learning-lab".default_tools_approval_mode="approve"',
             prompt,
         ]
         completed = subprocess.run(
@@ -76,16 +76,16 @@ def main() -> int:
             if event.get("type") == "item.completed"
             and event.get("item", {}).get("type") == "mcp_tool_call"
         ]
-        checkins = lab / ".learning-coach-prototype" / "checkins.jsonl"
+        checkins = lab / ".learning-coach" / "checkins.jsonl"
         if not checkins.is_file():
-            raise RuntimeError("Codex completed without creating the prototype check-in file")
+            raise RuntimeError("Codex completed without creating the check-in file")
         rows = [json.loads(line) for line in checkins.read_text(encoding="utf-8").splitlines()]
         if len(rows) != 1 or rows[0]["note"] != "real Codex MCP round trip":
             raise RuntimeError(f"Unexpected persisted events: {rows}")
         if len(mcp_calls) < 3:
             raise RuntimeError(f"Expected at least 3 MCP calls, got {len(mcp_calls)}")
 
-        print("Real Codex MCP demo passed")
+        print("Real Codex MCP smoke passed")
         print(f"mcpToolCalls={len(mcp_calls)}")
         print(f"persistedCheckins={len(rows)}")
         print("masteryChanged=false")

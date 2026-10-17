@@ -24,7 +24,11 @@ REQUIRED_FILES = (
     "plugins/ai-learning-coach/skills/learning-coach/LEARNER-BACKGROUND-FORMAT.md",
     "plugins/ai-learning-coach/skills/learning-coach/PROGRESS-FORMAT.md",
     "plugins/ai-learning-coach/.mcp.json",
-    "plugins/ai-learning-coach/mcp/learning_lab_demo.py",
+    "plugins/ai-learning-coach/.codex-mcp.json",
+    "plugins/ai-learning-coach/.claude-plugin/plugin.json",
+    ".claude-plugin/marketplace.json",
+    "plugins/ai-learning-coach/mcp/server.py",
+    "plugins/ai-learning-coach/skills/learning-coach/STARTER-TRACKS.md",
     "plugins/ai-learning-coach/mcp/README.md",
     "plugins/ai-learning-coach/mcp/learning_core.py",
     "plugins/ai-learning-coach/mcp/progress_view.py",
@@ -158,16 +162,26 @@ def validate_plugin_manifests(errors: list[str]) -> None:
                 )
         if manifest.get("skills") != "./skills/":
             errors.append("plugin.json: skills must point to ./skills/")
-        if manifest.get("mcpServers") != "./.mcp.json":
-            errors.append("plugin.json: mcpServers must point to ./.mcp.json")
+        # Codex reads only the declared file; Claude Code auto-loads .mcp.json with ${CLAUDE_PLUGIN_ROOT}.
+        if manifest.get("mcpServers") != "./.codex-mcp.json":
+            errors.append("plugin.json: mcpServers must point to ./.codex-mcp.json")
+        for name, needle in ((".codex-mcp.json", "mcp/server.py"), (".mcp.json", "${CLAUDE_PLUGIN_ROOT}/mcp/server.py")):
+            mcp_config = read_json(PLUGIN_ROOT / name, errors)
+            servers = mcp_config.get("mcpServers") if isinstance(mcp_config, dict) else None
+            if not isinstance(servers, dict) or set(servers) != {"learning-lab"}:
+                errors.append(f"{name}: expected exactly the learning-lab server")
+            elif servers["learning-lab"].get("command") != "uv" or needle not in servers["learning-lab"].get("args", []):
+                errors.append(f"{name}: learning-lab must launch {needle} through uv")
 
-        mcp_config = read_json(PLUGIN_ROOT / ".mcp.json", errors)
-        if not isinstance(mcp_config, dict):
-            errors.append(".mcp.json: expected an object")
-        elif not isinstance(mcp_config.get("mcpServers"), dict) or set(
-            mcp_config["mcpServers"]
-        ) != {"learning-lab-demo"}:
-            errors.append(".mcp.json: expected exactly the learning-lab-demo server")
+        claude_manifest = read_json(PLUGIN_ROOT / ".claude-plugin" / "plugin.json", errors)
+        if isinstance(claude_manifest, dict):
+            if claude_manifest.get("name") != "ai-learning-coach" or claude_manifest.get("version") != version:
+                errors.append(".claude-plugin/plugin.json: name and version must match the Codex manifest")
+        claude_marketplace = read_json(ROOT / ".claude-plugin" / "marketplace.json", errors)
+        if isinstance(claude_marketplace, dict):
+            entries = claude_marketplace.get("plugins")
+            if not isinstance(entries, list) or [p.get("source") for p in entries if isinstance(p, dict)] != ["./plugins/ai-learning-coach"]:
+                errors.append(".claude-plugin/marketplace.json: expected one plugin sourced from ./plugins/ai-learning-coach")
 
         interface = manifest.get("interface")
         if not isinstance(interface, dict):

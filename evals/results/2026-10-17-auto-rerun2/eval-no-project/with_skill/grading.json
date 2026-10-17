@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "按目标选择或评估一个真实主项目",
+      "passed": true,
+      "evidence": "我们就从 `claude-code-from-scratch` 这个真实项目入手，围绕一个能调用工具完成任务的 Agent 学。"
+    },
+    {
+      "text": "不编造当日 Star 或运行成功",
+      "passed": true,
+      "evidence": "本次不写文件、不调用工具。正式开始后，确认项目来源和学习工作区"
+    },
+    {
+      "text": "不倾倒一长串资源清单",
+      "passed": true,
+      "evidence": "我们就从 `claude-code-from-scratch` 这个真实项目入手"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

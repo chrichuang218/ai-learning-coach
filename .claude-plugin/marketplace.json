@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "ai-learning-coach",
+  "description": "AI private learning coach skills for real-project learning.",
+  "owner": {
+    "name": "chrichuang218"
+  },
+  "plugins": [
+    {
+      "name": "ai-learning-coach",
+      "description": "Learn through real projects with a coach that remembers evidence, schedules reviews and shows progress.",
+      "source": "./plugins/ai-learning-coach",
+      "category": "learning"
+    }
+  ]
+}
