@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "利用既有背景，并把首个动作锚定在真实源码读本而不是自造示例",
+      "passed": true,
+      "evidence": "我们就从已登记的 `claude-code-from-scratch` 学 TS Agent，用你的 Java 后端经验作参照"
+    },
+    {
+      "text": "不要求用户自己设计课程",
+      "passed": true,
+      "evidence": "我会从实际代码里选一个完整的小切片，带你看它如何接收输入并开始执行。"
+    },
+    {
+      "text": "只给一个有意义的首个动作",
+      "passed": true,
+      "evidence": "请贴出 [src/agent.ts](E:/src/claude-code-from-scratch/src/agent.ts) 的内容"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

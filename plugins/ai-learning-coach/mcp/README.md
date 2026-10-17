@@ -1,49 +1,38 @@
-# Learning Lab MCP Prototype
+# Learning Lab MCP Server
 
-This throwaway, no-UI prototype answers one question:
+`server.py` exposes a local Learning Lab over MCP stdio. Markdown files stay the source of truth; the server reads them, derives numbers, and writes only through validated operations.
 
-> Can Codex read structured learning state from a local Learning Lab, append an isolated check-in event, and read the updated state back through a bundled MCP server?
+| Tool | Writes | Purpose |
+| --- | --- | --- |
+| `get_learning_snapshot` | no | Mission, mainline, derived progress, milestones, rhythm, evidence, due reviews, warnings |
+| `get_resume_context` | no | Checkpoint, recent evidence and due reviews before resuming |
+| `doctor_learning_lab` | no | Missing files, broken links, drift, unsupported mastery states |
+| `get_review_queue` | no | Evidence whose `review_after` date passed without newer evidence |
+| `get_weekly_review` | no | Last seven days of evidence and rhythm, with a Markdown draft |
+| `record_evidence` | `learning-records/*.md` | Append one validated `learning-evidence` block; never changes mastery |
+| `set_milestone_state` | `PROGRESS.md` | Change one milestone row; refuses states the linked evidence does not support |
+| `sync_progress` | `PROGRESS.md` | Recompute weighted-progress lines, snapshot percentages and the rhythm section |
+| `record_checkin` | `.learning-coach/checkins.jsonl` | Attendance only; counts toward rhythm, never mastery |
+| `list_checkins` | no | Read attendance events |
 
-It exposes five tools:
+All tools share `learning_core.py` (standard library only), which also powers `scripts/learning_lab.py` and the offline HTML view. The server never verifies the learner's source repository; `sourceVerification: not_checked` reminds the coach to do that.
 
-- `get_learning_snapshot`
-- `record_checkin`
-- `list_checkins`
-- `doctor_learning_lab`
-- `get_resume_context`
+## Launch
 
-Snapshot, health and resume tools share the standard-library `learning_core.py` reader. It preserves legacy Markdown, recursively finds multitrack records, derives weighted progress, and reports date, attendance, link and assistance conflicts. It does not verify the source repository; the coach must do that before resuming.
+Both plugin hosts start the server with [uv](https://docs.astral.sh/uv/), which reads the inline script metadata in `server.py` and provisions Python 3.10+ and `mcp==1.27.0` automatically:
 
-The same reader powers the offline CLI and HTML view: see [Learning Lab tools](../../../docs/learning-lab.md).
+- Codex: `.codex-mcp.json` (declared in `.codex-plugin/plugin.json`), relative to the plugin root.
+- Claude Code: `.mcp.json`, using `${CLAUDE_PLUGIN_ROOT}`.
 
-`record_checkin` writes only to `.learning-coach-prototype/checkins.jsonl` inside the selected Learning Lab. It never edits `MISSION.md`, `PROGRESS.md`, `learning-records/`, or mastery values.
+Without uv, a client can run `python -X utf8 mcp/server.py` after `python -m pip install "mcp==1.27.0"`.
 
-## Prerequisite
+## Smoke tests
 
-```powershell
-python -m pip install "mcp==1.27.0"
+```bash
+python scripts/mcp_demo_smoke.py                      # in-process launch, needs mcp installed
+python scripts/mcp_demo_smoke.py --use-config codex   # exactly as Codex launches it, needs uv
+python scripts/mcp_demo_smoke.py --use-config claude  # exactly as Claude Code launches it, needs uv
+python -X utf8 scripts/codex_mcp_demo_smoke.py        # a real Codex turn; needs Codex authentication
 ```
 
-## Protocol smoke test
-
-```powershell
-python -X utf8 scripts/mcp_demo_smoke.py
-```
-
-## Real Codex smoke test
-
-After reinstalling the local plugin, run:
-
-```powershell
-python -X utf8 scripts/codex_mcp_demo_smoke.py
-```
-
-The real smoke uses a temporary Learning Lab, requires Codex authentication, and deletes the temporary directory after validation.
-
-## Prototype boundary
-
-- No UI.
-- No production schema migration.
-- No mastery writes.
-- No direct changes to the user's real Learning Lab during automated smoke tests.
-- The shared reader and pinned MCP dependency are included; check-in writing remains an isolated prototype and is not merged into attendance or mastery.
+The smoke tests use a temporary Learning Lab and never touch a real one.

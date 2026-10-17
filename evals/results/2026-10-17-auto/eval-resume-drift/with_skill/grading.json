@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "较新证据优先于旧 README 日期，不从第一课重讲",
+      "passed": true,
+      "evidence": "接着上次的检查点：**修改已有 Skill 的内容后，预测缓存会返回什么。**"
+    },
+    {
+      "text": "不把旧快照连续 1 天直接说成今天的连续天数",
+      "passed": true,
+      "evidence": "不能仅因过了几天就增加累计学习天数或延续连续学习记录。"
+    },
+    {
+      "text": "区分运行证据与独立设计，先核对源码再选一个动作",
+      "passed": false,
+      "evidence": "源码尚未重新核验，我们先把答案作为待验证的假设。"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 1,
+    "total": 3,
+    "pass_rate": 0.667
+  }
+}

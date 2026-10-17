@@ -10,10 +10,15 @@ Learning Lab 是包含使命、证据和下一入口的 Markdown 学习档案。
 python scripts/learning_lab.py snapshot /path/to/learning-lab
 python scripts/learning_lab.py doctor /path/to/learning-lab
 python scripts/learning_lab.py resume /path/to/learning-lab
+python scripts/learning_lab.py review /path/to/learning-lab
+python scripts/learning_lab.py weekly /path/to/learning-lab
+python scripts/learning_lab.py sync /path/to/learning-lab
 python scripts/learning_lab.py view /path/to/learning-lab --output /path/to/exports/progress.html
 ```
 
-打开生成的 HTML 即可查看下一检查点、能力与证据、最近进展、学习节奏。页面没有外部字体、脚本或网络请求，生成后是静态快照；记录变化后重新生成。覆盖已有导出时显式添加 `--force`，程序仍拒绝覆盖已知学习事实文件。
+`review` 列出到期复习，`weekly` 输出最近 7 天的复盘草稿（加 `--output` 保存）。`sync` 是唯一会写入的命令：只重算 PROGRESS 中的派生数字（加权进度行、快照百分比、学习节奏），不改里程碑、证据或手写文字。
+
+打开生成的 HTML 即可查看下一检查点、到期复习、能力与证据、最近进展、学习节奏。页面没有外部字体、脚本或网络请求，生成后是静态快照；记录变化后重新生成。覆盖已有导出时显式添加 `--force`，程序仍拒绝覆盖已知学习事实文件。
 
 导出应放到学习档案之外；若要放在档案内部，仅允许 `.learning-coach-exports/` 目录。`--force` 也不能覆盖其他位置。缺少当前周的日历时节奏显示未知，不把未覆盖日期当成零活动。
 
@@ -41,8 +46,17 @@ python scripts/learning_lab.py share /path/to/learning-lab --record learning-rec
 
 只导出选中证据的动作、帮助、结果和待验证点；不读取 LEARNER-BACKGROUND 或任何聊天历史。常见本机路径和链接会替换为占位文字，发布前仍需预览并删除其他个人信息。代码链接由用户核对可公开性后手动添加。没有上传、社区发帖或通知操作。
 
-## MCP 原型边界
+## MCP 工具
 
-原型的 `get_learning_snapshot`、`get_resume_context` 和 `doctor_learning_lab` 共用标准库读取层。`record_checkin` / `list_checkins` 仍只写读隔离的 `.learning-coach-prototype/checkins.jsonl`。
+MCP 服务器与命令行共用同一读取层，额外提供经过校验的写入：
 
-这些原型打卡不会合并进正式日历、不会修改 PROGRESS 或任何掌握状态。未来要统一出勤来源时，需要显式迁移；当前不同时维护两套正式状态。[MCP 配置及验证](../plugins/ai-learning-coach/mcp/README.md)
+| 工具 | 作用 |
+| --- | --- |
+| `get_learning_snapshot` / `doctor_learning_lab` / `get_resume_context` | 读取状态、诊断、续学上下文（含到期复习） |
+| `get_review_queue` / `get_weekly_review` | 到期复习与 7 天复盘 |
+| `record_evidence` | 校验后把一条证据追加到 `learning-records/`，不改变掌握状态 |
+| `set_milestone_state` | 修改一个里程碑状态并链接记录；证据帮助程度不足时拒绝 |
+| `sync_progress` | 重算 PROGRESS 中的派生数字 |
+| `record_checkin` / `list_checkins` | 打卡写入 `.learning-coach/checkins.jsonl`，计入学习节奏，不改变掌握状态 |
+
+旧版原型写在 `.learning-coach-prototype/checkins.jsonl` 的打卡继续被读取。没有手工日历时，学习节奏由最近活动、证据日期和打卡派生；已有手工日历继续有效。[MCP 配置及验证](../plugins/ai-learning-coach/mcp/README.md)

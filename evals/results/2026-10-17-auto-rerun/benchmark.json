@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-17",
+  "agent": "codex exec --skip-git-repo-check --sandbox read-only --color never -",
+  "judge": "codex exec --skip-git-repo-check --sandbox read-only --color never -",
+  "pass_rate": 0.75,
+  "cases": [
+    {
+      "id": 1,
+      "name": "resume-drift",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 4,
+      "name": "java-first-session",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 5,
+      "name": "no-project",
+      "passed": 2,
+      "failed": 1,
+      "total": 3,
+      "pass_rate": 0.667
+    },
+    {
+      "id": 8,
+      "name": "retention-failure",
+      "passed": 3,
+      "failed": 0,
+      "total": 3,
+      "pass_rate": 1.0
+    }
+  ]
+}

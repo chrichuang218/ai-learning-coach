@@ -13,7 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True, help="New directory; existing runs are never replaced")
     parser.add_argument("--baseline", type=Path, help="Old skill directory captured before editing")
-    parser.add_argument("--ids", nargs="+", type=int, help="Run packet IDs; default is all eight")
+    parser.add_argument("--ids", nargs="+", type=int, help="Run packet IDs; default is all")
     args = parser.parse_args()
     out = args.output.resolve()
     if out.exists():

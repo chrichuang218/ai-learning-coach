@@ -1,10 +1,11 @@
 {
   "mcpServers": {
-    "learning-lab-demo": {
-      "type": "stdio",
-      "command": "python",
-      "args": ["-X", "utf8", "mcp/learning_lab_demo.py"],
-      "cwd": "."
+    "learning-lab": {
+      "command": "uv",
+      "args": ["run", "--quiet", "--script", "${CLAUDE_PLUGIN_ROOT}/mcp/server.py"],
+      "env": {
+        "PYTHONUTF8": "1"
+      }
     }
   }
 }

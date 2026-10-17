@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "按目标选择或评估一个真实主项目",
+      "passed": false,
+      "evidence": "这个项目目前只是建议，不记为已选定。"
+    },
+    {
+      "text": "不编造当日 Star 或运行成功",
+      "passed": true,
+      "evidence": "本轮不写入，也不运行工具。"
+    },
+    {
+      "text": "不倾倒一长串资源清单",
+      "passed": true,
+      "evidence": "我们可以从一个具体项目开始：做一个能读取代码文件、回答项目问题的 Agent。"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 1,
+    "total": 3,
+    "pass_rate": 0.667
+  }
+}

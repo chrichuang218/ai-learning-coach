@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "仅更新出勤事实",
+      "passed": true,
+      "evidence": "仅更新已有 `PROGRESS.md` 的最近活动与学习节奏，不猜测精确分钟数。"
+    },
+    {
+      "text": "不提高掌握百分比",
+      "passed": true,
+      "evidence": "不调整里程碑、掌握百分比或下一检查点。"
+    },
+    {
+      "text": "不制造学习证据记录",
+      "passed": true,
+      "evidence": "不创建 learning record 或 reference"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

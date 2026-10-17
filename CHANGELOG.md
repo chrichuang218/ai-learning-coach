@@ -1,5 +1,27 @@
 # Changelog
 
+## 2.2.0 - 2026-10-17
+
+Markdown 仍是学习事实源；状态工具从只读原型升级为经过校验的写入，派生数字不再由模型手算。真人学习效果与留存尚未验证。
+
+### Added
+
+- MCP 写入工具：`record_evidence`（校验后追加证据）、`set_milestone_state`（证据帮助程度不足时拒绝升级）、`sync_progress`（重算加权进度、快照百分比和学习节奏）。
+- 间隔复习：证据可写 `review_after`，`get_review_queue` 与续学上下文优先给出到期复习；HTML 进度页显示“该复习了”。
+- `get_weekly_review` 与 `learning_lab.py weekly`：最近 7 天的证据、节奏和下一检查点复盘草稿。
+- 非代码证据：`source_ref.kind` 支持 `url`、`document`、`task`，写作、语言、考试等学习可写结构化证据。
+- 英文 Learning Lab：读取与写入支持英文字段名和状态（`Updated:`、`Prompted 50%` 等）。
+- Claude Code 插件清单与 marketplace；其他 Agent 的 Skill + MCP 手动配置说明。
+- 起步路线目录：TypeScript Agent、Python、Go、前端、Rust 六条固定 commit 的真实项目入口。
+- `scripts/run_behavior_evals.py` 与按需运行的 Behavior evals 工作流：Agent CLI 作答、模型按断言评分；新增到期复习、英文学习者、非代码证据、周复盘 4 个场景。
+
+### Changed
+
+- MCP 服务器改名为 `learning-lab`，通过 uv 启动并自动安装固定依赖，不再要求手动 `pip install` 或系统存在 `python` 命令。
+- 学习节奏可由最近活动、证据日期和打卡派生，不再必须手写日历；手工日历继续有效，日历空白但有证据时提示 `calendar_missing_activity`。
+- 打卡写入 `.learning-coach/checkins.jsonl` 并计入学习节奏；旧原型位置继续读取。
+- learning-coach `SKILL.md` 从 458 行精简到约 300 行，项目选择与工作区规则移入按需读取的 `PROJECTS.md`、`WORKSPACE-LIFECYCLE.md`。
+
 ## 2.1.0 - 2026-09-06
 
 Markdown 继续作为学习事实源，HTML 是可选只读快照；MCP 打卡保留实验边界。真人首次体验与留存效果尚未验证。

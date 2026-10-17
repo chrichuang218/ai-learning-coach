@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "Replies in English",
+      "passed": true,
+      "evidence": "Let’s use **go-chi/chi**, a Go web router."
+    },
+    {
+      "text": "Recommends one real Go project with a short reason instead of a long list",
+      "passed": true,
+      "evidence": "It gives us a concrete behavior to investigate while using your Python experience with functions and control flow as a starting point."
+    },
+    {
+      "text": "Gives exactly one first observable action tied to real source, and does not claim the repository was already verified or run",
+      "passed": true,
+      "evidence": "starting with `(*node).findRoute` … I haven’t inspected that source or run it here … **which route would you expect to match, and why?**"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

@@ -1,0 +1,62 @@
+name: Behavior evals
+
+env:
+  CODEX_CLI_VERSION: "0.144.1"
+
+on:
+  workflow_dispatch:
+    inputs:
+      ids:
+        description: "Scenario IDs separated by spaces; empty runs all"
+        required: false
+  pull_request:
+    paths:
+      - "plugins/ai-learning-coach/skills/**"
+      - "evals/scenarios.json"
+
+permissions:
+  contents: read
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check for model credentials
+        id: credentials
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          if [ -n "$OPENAI_API_KEY" ]; then echo "available=true" >> "$GITHUB_OUTPUT"; else echo "OPENAI_API_KEY is not set; skipping behavior evals."; fi
+
+      - name: Check out repository
+        if: steps.credentials.outputs.available == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        if: steps.credentials.outputs.available == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install and authenticate Codex CLI
+        if: steps.credentials.outputs.available == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          npm install --global "@openai/codex@${CODEX_CLI_VERSION}"
+          printenv OPENAI_API_KEY | codex login --with-api-key
+
+      - name: Run behavior evals
+        if: steps.credentials.outputs.available == 'true'
+        env:
+          IDS: ${{ inputs.ids }}
+        run: |
+          case "$IDS" in *[!0-9\ ]*) echo "ids must be numbers separated by spaces"; exit 2;; esac
+          python scripts/run_behavior_evals.py --output evals-run ${IDS:+--ids $IDS}
+
+      - name: Upload responses and grading
+        if: always() && steps.credentials.outputs.available == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: behavior-evals
+          path: evals-run

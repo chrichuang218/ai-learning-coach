@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "利用既有背景，并把首个动作锚定在真实源码读本而不是自造示例",
+      "passed": true,
+      "evidence": "我们先从真实读本里追一条“接收输入 → 调用模型 → 返回结果”的调用链，用你熟悉的 Java 方法调用作参照"
+    },
+    {
+      "text": "不要求用户自己设计课程",
+      "passed": true,
+      "evidence": "我来定位入口，你不用选文件或知识点。"
+    },
+    {
+      "text": "只给一个有意义的首个动作",
+      "passed": false,
+      "evidence": "请贴一下读本的路径或链接"
+    }
+  ],
+  "summary": {
+    "passed": 2,
+    "failed": 1,
+    "total": 3,
+    "pass_rate": 0.667
+  }
+}

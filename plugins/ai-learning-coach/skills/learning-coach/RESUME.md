@@ -6,9 +6,9 @@
 2. 核对 PROGRESS 更新时间与今天；“当前连续学习”“本周”必须说明截至日期。日历和 ETA 文字中累计天数冲突时按已有事实修正描述，缺少有效时长仍保留低置信度；不补造活动。
 3. 检查真实源码路径、当前 HEAD、工作区修改和相关 symbol。保留历史 commit，对当前入口重新定位；出现用户修改时直接围绕现场，不重置或切换去覆盖它。
 4. 从最近证据提取“上次做到哪里、获得什么帮助、哪部分待复验”。亲自运行命令不等于独立设计测试。
-5. 给一个有意义的当前动作。暂停较久时，选一个能观察保留程度的小切片，不重新开整门基础课。
+5. 有到期复习（`review_after` 已到）时，先做一次不看提示的回忆或迁移检查，把结果写成新证据；没有到期项时，给一个有意义的当前动作。暂停较久时，选一个能观察保留程度的小切片，不重新开整门基础课。
 
-如果已提供 Learning Lab MCP 工具，可用 `get_resume_context` 提取结构化状态、`doctor_learning_lab` 检查一致性；它们返回 `sourceVerification: not_checked` 时仍需你实际检查源码。没有工具时按文件完成相同工作，不因 MCP 缺失停课。
+如果已提供 Learning Lab MCP 工具，可用 `get_resume_context` 提取结构化状态和到期复习、`doctor_learning_lab` 检查一致性；它们返回 `sourceVerification: not_checked` 时仍需你实际检查源码。没有工具时按文件完成相同工作，不因 MCP 缺失停课。
 
 需要新技术证据被工具读取时，参照 [EVIDENCE-FORMAT.md](EVIDENCE-FORMAT.md)。原有纯 Markdown 记录继续有效；逐次补新事实，避免一次性重写历史。
 

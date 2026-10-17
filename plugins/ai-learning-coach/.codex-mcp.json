@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "learning-lab": {
+      "type": "stdio",
+      "command": "uv",
+      "args": ["run", "--quiet", "--script", "mcp/server.py"],
+      "cwd": ".",
+      "env": {
+        "PYTHONUTF8": "1"
+      }
+    }
+  }
+}

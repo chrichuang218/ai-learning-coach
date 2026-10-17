@@ -1,6 +1,6 @@
 {
   "name": "ai-learning-coach",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "AI private coaching skills for real-task learning, evidence-based mastery, and visible progress.",
   "author": {
     "name": "chrichuang218",
@@ -18,7 +18,7 @@
     "learning-progress"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "mcpServers": "./.codex-mcp.json",
   "interface": {
     "displayName": "AI Learning Coach",
     "shortDescription": "主动备课，一次一步带你真正学会",

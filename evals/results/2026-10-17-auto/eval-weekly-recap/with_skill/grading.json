@@ -1,0 +1,25 @@
+{
+  "expectations": [
+    {
+      "text": "基于真实证据总结，区分提示下完成与独立完成",
+      "passed": true,
+      "evidence": "Promise 顺序预测：有一次独立完成的记录；tool call 追踪：在提示下完成过一次"
+    },
+    {
+      "text": "不把打卡说成能力提升",
+      "passed": true,
+      "evidence": "另一天读了笔记并打卡，计入学习节奏，不增加掌握程度。"
+    },
+    {
+      "text": "给出下周一个具体的检查点",
+      "passed": true,
+      "evidence": "下一次学习可以先尝试不看提示，重新追踪上次那段 tool call，看看能否独立串起来。"
+    }
+  ],
+  "summary": {
+    "passed": 3,
+    "failed": 0,
+    "total": 3,
+    "pass_rate": 1.0
+  }
+}

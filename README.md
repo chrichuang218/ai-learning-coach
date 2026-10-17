@@ -34,15 +34,24 @@ codex plugin marketplace add chrichuang218/ai-learning-coach
 codex plugin add ai-learning-coach@ai-learning-coach
 ```
 
-安装后**新开一个 Codex 会话**，直接说：
+使用 Claude Code：
+
+```bash
+claude plugin marketplace add chrichuang218/ai-learning-coach
+claude plugin install ai-learning-coach@ai-learning-coach
+```
+
+Cursor、Gemini CLI 等其他 Agent 可以只装 Skill，见 [安装说明](docs/install.md#其他-agentcursorgemini-cliopencode-等)。
+
+安装后**新开一个会话**，直接说：
 
 ```text
 我会 Java，想通过真实 Agent 项目学习 TypeScript。帮我选择第一个源码入口，然后带我开始。
 ```
 
-已有项目时把路径一起发给教练，就从你的项目开始。没有项目时，试试 [缓存失效首次体验](examples/first-session/README.md)：固定真实源码版本、一个可运行测试、一个下一入口，学习预算约 15 分钟。
+已有项目时把路径一起发给教练，就从你的项目开始。没有项目时，教练会从 [起步路线](plugins/ai-learning-coach/skills/learning-coach/STARTER-TRACKS.md) 中选一个真实仓库（TypeScript Agent、Python、Go、前端、Rust）；也可以先试 [缓存失效首次体验](examples/first-session/README.md)：固定真实源码版本、一个可运行测试、一个下一入口，学习预算约 15 分钟。
 
-主安装路径以 Codex marketplace 为准。MCP 本地工具仍为原型，需要 Python 3.10+ 和 `mcp==1.27.0`；普通 Skill 教学通过文件工具也可进行。完整的环境、skills.sh 分发区别和排障见 [安装说明](docs/install.md)。
+状态工具（记录证据、到期复习、周复盘、自动计算进度）通过 [uv](https://docs.astral.sh/uv/) 启动，装好 uv 即可，依赖会自动准备；没有 uv 时，普通 Skill 教学通过文件工具照常进行。完整的环境、skills.sh 分发区别和排障见 [安装说明](docs/install.md)。
 
 公共命令安装远端发布版本。本版包含首次体验与可选状态工具；开发者可用隔离环境验证本地源码：
 
@@ -59,7 +68,7 @@ python scripts/release_smoke.py
 - **当前状态**：已能做到什么、还需验证什么、下一处真实入口。
 - **稳定知识**：值得复习的结论，可被 Obsidian 等工具继续使用。
 
-打卡记录节奏，能力来自证据。百分比只是约定里程碑的汇总；页面优先展示独立程度和下一步。
+打卡记录节奏，能力来自证据。百分比只是约定里程碑的汇总，由工具计算，证据不足时工具会拒绝升级；需要复验的边界到期后，教练会在下次开始时先带你回忆。中文和英文档案都能读取。
 
 [查看本地进度页与诊断工具](docs/learning-lab.md) · [单轨道初始示例](examples/workspaces/first-session/README.md) · [多轨道示例](examples/workspaces/minimal-multitrack/README.md)
 
@@ -74,7 +83,7 @@ python scripts/release_smoke.py
 
 ## 验证和参与
 
-已有静态校验、隔离安装冒烟、行为评分标准及历史版本对比。新增状态检查和缓存体验均有工程验证；真人首次完成率与七日复用仍待自愿试用反馈，不用 Star 或文件数量代替。
+已有静态校验、隔离安装冒烟、两种宿主启动配置下的 MCP 全工具冒烟，以及可按需运行的自动行为评估（12 个场景，见 [评估与复现](evals/README.md)）。真人首次完成率与七日复用仍待自愿试用反馈，不用 Star 或文件数量代替。
 
 ```bash
 python -m pip install pyyaml
